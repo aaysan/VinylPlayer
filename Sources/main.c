@@ -2,7 +2,7 @@
 ************************************************************************
  ECE 362 - Mini-Project C Source File - Spring 2017
 ***********************************************************************
-	 	   			 		  			 		  		
+
  Team ID: < ? >
 
  Project Name: < ? >
@@ -10,7 +10,7 @@
  Team Members:
 
    - Team/Doc Leader: < ? >      Signature: ______________________
-   
+
    - Software Leader: < ? >      Signature: ______________________
 
    - Interface Leader: < ? >     Signature: ______________________
@@ -18,10 +18,10 @@
    - Peripheral Leader: < ? >    Signature: ______________________
 
 
- Academic Honesty Statement:  In signing above, we hereby certify that we 
+ Academic Honesty Statement:  In signing above, we hereby certify that we
  are the individuals who created this HC(S)12 source file and that we have
- not copied the work of any other student (past or present) while completing 
- it. We understand that if we fail to honor this agreement, we will receive 
+ not copied the work of any other student (past or present) while completing
+ it. We understand that if we fail to honor this agreement, we will receive
  a grade of ZERO and be subject to possible disciplinary action.
 
 ***********************************************************************
@@ -79,15 +79,20 @@ void pmsglcd(char[]);
 /* Variable declarations */
 int leftpb = 0;    // left pushbutton flag
 int rghtpb = 0;    // right pushbutton flag
-int runstp = 0;    // run/stop flag  
+int runstp = 0;    // run/stop flagï¿½ï¿½
 int prevlpb = 1; //prev state of left pb
 int prevrpb = 1; //prev state of right pb
 char n = 0;      //temp char to shift numbers into lcd
-   	   			 		  			 		       
+int pwmout = 0;
+int bar = 0;
+int m = 0;
+int avgout = 0;
+unsigned int out;
+unsigned int out1;
 
 /* Special ASCII characters */
-#define CR 0x0D		// ASCII return 
-#define LF 0x0A		// ASCII new line 
+#define CR 0x0D		// ASCII returnï¿½
+#define LF 0x0A		// ASCII new lineï¿½
 
 /* LCD COMMUNICATION BIT MASKS (note - different than previous labs) */
 #define RS 0x10		// RS pin mask (PTT[4])
@@ -99,11 +104,11 @@ char n = 0;      //temp char to shift numbers into lcd
 #define LCDCLR 0x01	// LCD clear display command
 #define TWOLINE 0x38	// LCD 2-line enable command
 #define CURMOV 0xFE	// LCD cursor move instruction
-#define LINE1 = 0x80	// LCD line 1 cursor position
-#define LINE2 = 0xC0	// LCD line 2 cursor position
+#define LINE1 0x80	// LCD line 1 cursor position
+#define LINE2 0xC0	// LCD line 2 cursor position
 
-	 	   		
-/*	 	   		
+
+/*
 ***********************************************************************
  Initializations
 ***********************************************************************
@@ -124,7 +129,7 @@ void  initializations(void) {
 
 /* Initialize asynchronous serial port (SCI) for 9600 baud, interrupts off initially */
   SCIBDH =  0x00; //set baud rate to 9600
-  SCIBDL =  0x9C; //24,000,000 / 16 / 156 = 9600 (approx)  
+  SCIBDL =  0x9C; //24,000,000 / 16 / 156 = 9600 (approx)
   SCICR1 =  0x00; //$9C = 156
   SCICR2 =  0x0C; //initialize SCI for program-driven operation
   DDRB   =  0x10; //set PB4 for output mode
@@ -133,12 +138,12 @@ void  initializations(void) {
 /* Initialize peripherals */
     DDRAD = 0; 		//program port AD for input mode
     ATDDIEN = 0xC0; //program PAD7 and PAD6 pins as digital inputs
-    
+
     DDRT = 0b00011011; //outputs = PTT 0,1,3,4
-    
+
     ATDCTL2 = 0x80;
-    ATDCTL3 = 0x00; 
-    ATDCTL4 = 0b11100101;  //8bit res, 16 ATD clock periods, prescaler = 12
+    ATDCTL3 = 0x00;
+    ATDCTL4 = 0b10000101;  //8bit res, 16 ATD clock periods, prescaler = 12
 
 
     SPICR1 = 0b01010000;
@@ -152,83 +157,112 @@ void  initializations(void) {
    DDRM = 0b11111111; //outputs = PTM 4,5
 
 
-   
+
 /* Initialize the LCD
      - pull LCDCLK high (idle)
      - pull R/W' low (write state)
      - turn on LCD (LCDON instruction)
      - enable two-line mode (TWOLINE instruction)
      - clear LCD (LCDCLR instruction)
-     - wait for 2ms so that the LCD can wake up     
-*/ 
+     - wait for 2ms so that the LCD can wake up
+*/
   PTT_PTT4 = 1;   //pull LCDCLK high (connected to PT4)
   PTT_PTT3 = 0;   //pull R/W' low (connected to PT3)
   send_i(LCDON); //turn on LCD
   send_i(TWOLINE); //enable 2-line mode
-  send_i(LCDCLR); //clear LCD                                                                                        
-  lcdwait();  //wait   
+  send_i(LCDCLR); //clear LCD
+  lcdwait();  //wait
  // pmsglcd("test");
-            
+
 /* Initialize interrupts */
-	      
+
 	 RTICTL = 0x31;
-   CRGINT = 0x80;     
+   CRGINT = 0x80;
+
+   DDRP = 0xFF;
+   MODRR = 0x03;
+   PWME = 0x03;
+   PWMPOL = 0x01;
+   PWMCTL = 0x00;
+   PWMCAE = 0x00;
+   PWMPER0 = 0xFF;
+   PWMDTY0 = 0x00;
+   PWMPER1 = 0xFF;
+   PWMDTY1 = 0x90;
+   PWMCLK = 0x02;
+   PWMPRCLK = 0x06;
+   PWMSCLA = 4;
+
+  /*Initialize TIM here */
+  TSCR1 = 0x80;
+    TSCR2 = 0x0C;
+  TIOS = 0x80;
+  TIE = 0x80;
+  TC7 = 150;
 }
 
 
 
-	 		  			 		  		
-/*	 		  			 		  		
+
+/*
 ***********************************************************************
 Main
 ***********************************************************************
 */
 void main(void) {
   	DisableInterrupts
-	initializations(); 		  			 		  		
+	initializations();
 	EnableInterrupts;
- 
+
  for(;;) {
-  
-/* < start of your main loop > */ 
+
+/* < start of your main loop > */
   int delayct = 0;
   int i = 0;
-  byte out;
+
    if ( leftpb == 1){
       leftpb = 0;
       //toggle runstp
       if ( runstp == 1 ){
-        runstp = 0; 
+        runstp = 0;
       } else{
-        runstp = 1; 
+        runstp = 1;
       }
    }
-   
+
    if (runstp == 1){
-       //ATD conversion sequence 
-       ATDCTL5 = 0x10; //output 10-bit data
-       while(ATDSTAT0 != 0x80) { //check conversion complete
-       }
-    
-       out = ATDDR0H; //output digital signal on PTT0
-    
+       //ATD conversion sequence
+       
+
+       out = ATDDR0; //output digital signal on PTT0
+       out1 = ATDDR1;
+       out = out * out1;
        for (i=0; i < 10; i++){
-          
+
            //check output value's 1st bit and output that bit to PTT3
            if ((out & 0x80) == 0x80){
-              PTT_PTT0 = 1; 
-           } 
+              PTT_PTT0 = 1;
+           }
            else {
               PTT_PTT0 = 0;
            }
-           
-          
+
+
            //shift output bits
            out = out << 1;
         }
-        
+
         out = ATDDR0H; //output digital signal on PTT0
-    
+        avgout = out + avgout;
+        m++;
+        
+        if ( m == 10) {
+            m = 0;
+            out = avgout/10;
+            avgout = 0;
+            //out = out - (out - 225) * 2;
+        
+        chgline(LINE1);
         send_i(LCDCLR);
         pmsglcd("out = ");
         n = (out / 100) % 10;
@@ -236,31 +270,39 @@ void main(void) {
         n = (out / 10) % 10;
         print_c(n + '0');
         n = out % 10;
-        print_c(n + '0'); 
-    
+        print_c(n + '0');
+        
+        chgline(LINE2);
+        bar = out/17;
+        while(bar > 0) {
+          print_c(0xFF);
+          bar--;
+        }
+       }
+
    }
 
-  
+
    } /* loop forever */
-   
+
 }   /* do not leave main */
 
 
 
 
 /*
-***********************************************************************                       
+***********************************************************************   ï¿½ï¿½ï¿½ï¿½  ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
  RTI interrupt service routine: RTI_ISR
 ************************************************************************
 */
 
 interrupt 7 void RTI_ISR(void)
 {
-  	// clear RTI interrupt flagt 
-  	CRGFLG = CRGFLG | 0x80; 
- 
+  	// clear RTI interrupt flagt
+  	CRGFLG = CRGFLG | 0x80;
+
     if ((PORTAD0_PTAD7 == 0) && (prevlpb == 1)){
-       leftpb = 1; 
+       leftpb = 1;
     }
 
     if ((PORTAD0_PTAD6 == 0) && (prevrpb == 1)) {
@@ -273,28 +315,38 @@ interrupt 7 void RTI_ISR(void)
 }
 
 /*
-***********************************************************************                       
-  TIM interrupt service routine	  		
+***********************************************************************   ï¿½ï¿½ï¿½ï¿½  ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  TIM interrupt service routine
 ***********************************************************************
 */
 
 interrupt 15 void TIM_ISR(void)
 {
-  	// clear TIM CH 7 interrupt flag 
- 	TFLG1 = TFLG1 | 0x80; 
- 
+  	// clear TIM CH 7 interrupt flag
+ 	TFLG1 = TFLG1 | 0x80;
+ 	ATDCTL5 = 0x10; //output 10-bit data
+       while(ATDSTAT0 != 0x80) { //check conversion complete
+       }
+   asm {
+    	ldaa	ATDDR0		
+	    ldab	ATDDR1	
+	    mul		
+	    adca	#0		
+	    staa	PWMDTY0	
+  }
+
 
 }
 
 /*
-***********************************************************************                       
-  SCI interrupt service routine		 		  		
+***********************************************************************   ï¿½ï¿½ï¿½ï¿½  ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  SCI interrupt service routine
 ***********************************************************************
 */
 
 interrupt 20 void SCI_ISR(void)
 {
- 
+
 
 
 }
@@ -302,14 +354,14 @@ interrupt 20 void SCI_ISR(void)
 
 /*
 ***********************************************************************
-  shiftout: Transmits the character x to external shift 
-            register using the SPI.  It should shift MSB first.  
-             
+  shiftout: Transmits the character x to external shift
+            register using the SPI.  It should shift MSB first.
+
             MISO = PM[4]
             SCK  = PM[5]
 ***********************************************************************
 */
- 
+
 void shiftout(char x)
 
 {
@@ -319,7 +371,7 @@ void shiftout(char x)
   // wait for 30 cycles for SPI data to shift out
   while (SPISR_SPTEF != 1){
   }
-   
+
    SPIDR = x;
    for(i=0;i < 30; i++){
    }
@@ -340,7 +392,7 @@ void lcdwait()
 }
 
 /*
-*********************************************************************** 
+***********************************************************************
   send_byte: writes character x to the LCD
 ***********************************************************************
 */
@@ -355,12 +407,12 @@ void send_byte(char x)
      PTT_PTT4 = 1;
      PTT_PTT4 = 0;
      lcdwait();
-     
+
 }
 
 /*
 ***********************************************************************
-  send_i: Sends instruction byte x to LCD  
+  send_i: Sends instruction byte x to LCD
 ***********************************************************************
 */
 
@@ -387,10 +439,10 @@ void chgline(char x)
 
 /*
 ***********************************************************************
-  print_c: Print (single) character x on LCD            
+  print_c: Print (single) character x on LCD
 ***********************************************************************
 */
- 
+
 void print_c(char x)
 {
     PTT_PTT2 = 1;
@@ -415,7 +467,7 @@ void pmsglcd(char str[])
 
 /*
 ***********************************************************************
- Character I/O Library Routines for 9S12C32 
+ Character I/O Library Routines for 9S12C32
 ***********************************************************************
  Name:         inchar
  Description:  inputs ASCII character from SCI serial port and returns it

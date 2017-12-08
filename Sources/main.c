@@ -89,10 +89,13 @@ int m = 0;
 int avgout = 0;
 unsigned int out;
 unsigned int out1;
+<<<<<<< HEAD
 int time = 0;
 int tenthou = 0;
 int sec = 00;
 int min = 00;
+=======
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
 
 /* Special ASCII characters */
 #define CR 0x0D		// ASCII return�
@@ -194,12 +197,21 @@ void  initializations(void) {
    PWMPER1 = 0xFF;
    PWMDTY1 = 0x90;
    PWMCLK = 0x02;
+<<<<<<< HEAD
    PWMPRCLK = 0x01;
    PWMSCLA = 90;
 
   /*Initialize TIM here */
   TSCR1 = 0x80;
   TSCR2 = 0x0C;
+=======
+   PWMPRCLK = 0x06;
+   PWMSCLA = 4;
+
+  /*Initialize TIM here */
+  TSCR1 = 0x80;
+    TSCR2 = 0x0C;
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
   TIOS = 0x80;
   TIE = 0x80;
   TC7 = 150;
@@ -221,11 +233,18 @@ void main(void) {
  for(;;) {
 
 /* < start of your main loop > */
+<<<<<<< HEAD
  /* < start of your main loop > */
   int delayct = 0;
   int i = 0;
   
    if (leftpb == 1){
+=======
+  int delayct = 0;
+  int i = 0;
+
+   if ( leftpb == 1){
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
       leftpb = 0;
       //toggle runstp
       if ( runstp == 1 ){
@@ -234,6 +253,7 @@ void main(void) {
         runstp = 1;
       }
    }
+<<<<<<< HEAD
   
  
 
@@ -252,6 +272,19 @@ void main(void) {
        for (i=0; i < 10; i++){
 
            //check output value's 1st bit and output that bit to PTT0
+=======
+
+   if (runstp == 1){
+       //ATD conversion sequence
+       
+
+       out = ATDDR0; //output digital signal on PTT0
+       out1 = ATDDR1;
+       out = out * out1;
+       for (i=0; i < 10; i++){
+
+           //check output value's 1st bit and output that bit to PTT3
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
            if ((out & 0x80) == 0x80){
               PTT_PTT0 = 1;
            }
@@ -263,6 +296,7 @@ void main(void) {
            //shift output bits
            out = out << 1;
         }
+<<<<<<< HEAD
         
         if (tenthou >= 10000){       //if TC7 = 150 then it takes 10000 TIM interrupts to get one second?
           tenthou = 0;
@@ -292,6 +326,10 @@ void main(void) {
         
         /*
         //out = ATDDR0H; //output digital signal on PTT0
+=======
+
+        out = ATDDR0H; //output digital signal on PTT0
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
         avgout = out + avgout;
         m++;
         
@@ -299,10 +337,17 @@ void main(void) {
             m = 0;
             out = avgout/10;
             avgout = 0;
+<<<<<<< HEAD
             //out = PWMDTY0 - (PWMDTY0 - 130) * 2;
         
         chgline(LINE1);
         //send_i(LCDCLR);
+=======
+            //out = out - (out - 225) * 2;
+        
+        chgline(LINE1);
+        send_i(LCDCLR);
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
         pmsglcd("out = ");
         n = (out / 100) % 10;
         print_c(n + '0');
@@ -311,6 +356,7 @@ void main(void) {
         n = out % 10;
         print_c(n + '0');
         
+<<<<<<< HEAD
         
         
         chgline(LINE1);
@@ -387,16 +433,28 @@ void main(void) {
        
         
         /*chgline(LINE2);
+=======
+        chgline(LINE2);
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
         bar = out/17;
         while(bar > 0) {
           print_c(0xFF);
           bar--;
+<<<<<<< HEAD
         }*/
      //  }
 
    //}
 
 
+=======
+        }
+       }
+
+   }
+
+
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
    } /* loop forever */
 
 }   /* do not leave main */
@@ -438,7 +496,10 @@ interrupt 15 void TIM_ISR(void)
 {
   	// clear TIM CH 7 interrupt flag
  	TFLG1 = TFLG1 | 0x80;
+<<<<<<< HEAD
  	tenthou = (tenthou + 1);
+=======
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
  	ATDCTL5 = 0x10; //output 10-bit data
        while(ATDSTAT0 != 0x80) { //check conversion complete
        }

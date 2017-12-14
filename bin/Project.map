@@ -1,5 +1,13 @@
 *** EVALUATION ***
+<<<<<<< HEAD
 PROGRAM "U:\Desktop\MiniPrj_S17\bin\Project.abs"
+=======
+<<<<<<< HEAD
+PROGRAM "U:\Desktop\MiniPrj_S17\bin\Project.abs"
+=======
+PROGRAM "W:\ecn.data\Desktop\MiniPrj_S17\bin\Project.abs"
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 
 *********************************************************************************************
 TARGET SECTION
@@ -24,7 +32,15 @@ _startupData is allocated at 0xC031 and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
   _Range   pZeroOut       0x900     21
+<<<<<<< HEAD
   _Copy    *toCopyDownBeg 0xC297
+=======
+<<<<<<< HEAD
+  _Copy    *toCopyDownBeg 0xC297
+=======
+  _Copy    *toCopyDownBeg 0xC299
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 } _startupData;
 
 *********************************************************************************************
@@ -33,9 +49,21 @@ Section Name                    Size  Type     From       To       Segment
 ---------------------------------------------------------------------------------------------
 .init                             49     R     0xC000     0xC030   ROM_C000
 .startData                        10     R     0xC031     0xC03A   ROM_C000
+<<<<<<< HEAD
 .rodata1                          10     R     0xC03B     0xC044   ROM_C000
 .text                            594     R     0xC045     0xC296   ROM_C000
 .copy                              9     R     0xC297     0xC29F   ROM_C000
+=======
+<<<<<<< HEAD
+.rodata1                          10     R     0xC03B     0xC044   ROM_C000
+.text                            594     R     0xC045     0xC296   ROM_C000
+.copy                              9     R     0xC297     0xC29F   ROM_C000
+=======
+.rodata1                           7     R     0xC03B     0xC041   ROM_C000
+.text                            599     R     0xC042     0xC298   ROM_C000
+.copy                              9     R     0xC299     0xC2A1   ROM_C000
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 .stack                           256   R/W      0x800      0x8FF   RAM
 .data                              4   R/W      0x900      0x903   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
@@ -267,7 +295,15 @@ Section Name                    Size  Type     From       To       Segment
 .vectSeg224_vect                   2     R     0xFFFE     0xFFFF   .vectSeg224
 
 Summary of section sizes per section type:
+<<<<<<< HEAD
 READ_ONLY (R):         2A8 (dec:      680)
+=======
+<<<<<<< HEAD
+READ_ONLY (R):         2A8 (dec:      680)
+=======
+READ_ONLY (R):         2AA (dec:      682)
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 READ_WRITE (R/W):      115 (dec:      277)
 NO_INIT (N/I):         104 (dec:      260)
 
@@ -485,7 +521,14 @@ MODULE:                 -- mc9s12c32.c.o --
      _PACNT                                      62       2       2       0   .abs_section_62
      _ATDCTL23                                   82       2       2       2   .abs_section_82
      _ATDCTL45                                   84       2       2       2   .abs_section_84
+<<<<<<< HEAD
      _ATDDR0                                     90       2       2       2   .abs_section_90
+<<<<<<< HEAD
+=======
+=======
+     _ATDDR0                                     90       2       2       3   .abs_section_90
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
      _ATDDR1                                     92       2       2       2   .abs_section_92
      _ATDDR2                                     94       2       2       0   .abs_section_94
      _ATDDR3                                     96       2       2       0   .abs_section_96
@@ -500,13 +543,25 @@ MODULE:                 -- mc9s12c32.c.o --
      _PWMPER01                                   F2       2       2       2   .abs_section_f2
      _PWMPER23                                   F4       2       2       0   .abs_section_f4
      _PWMPER45                                   F6       2       2       0   .abs_section_f6
+<<<<<<< HEAD
      _PWMDTY01                                   F8       2       2       4   .abs_section_f8
+=======
+<<<<<<< HEAD
+     _PWMDTY01                                   F8       2       2       4   .abs_section_f8
+=======
+     _PWMDTY01                                   F8       2       2       3   .abs_section_f8
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
      _PWMDTY23                                   FA       2       2       0   .abs_section_fa
      _PWMDTY45                                   FC       2       2       0   .abs_section_fc
      _CANRXTSR                                  16E       2       2       0   .abs_section_16e
      _CANTXTSR                                  17E       2       2       0   .abs_section_17e
 MODULE:                 -- main.c.o --
 - PROCEDURES:
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
      initializations                           C045      B2     178       1   .text       
      main                                      C0F7      DA     218       3   .text       
      RTI_ISR                                   C1D1      3B      59       1   .text       
@@ -519,6 +574,23 @@ MODULE:                 -- main.c.o --
      chgline                                   C261       B      11       1   .text       
      print_c                                   C26C       7       7       2   .text       
      pmsglcd                                   C273      24      36       2   .text       
+<<<<<<< HEAD
+=======
+=======
+     initializations                           C042      B3     179       1   .text       
+     main                                      C0F5      E5     229       3   .text       
+     RTI_ISR                                   C1DA      3B      59       1   .text       
+     TIM_ISR                                   C215      17      23       1   .text       
+     SCI_ISR                                   C22C       1       1       1   .text       
+     shiftout                                  C22D      14      20       1   .text       
+     lcdwait                                   C241       A      10       2   .text       
+     send_byte                                 C24B      11      17       2   .text       
+     send_i                                    C25C       7       7       6   .text       
+     chgline                                   C263       B      11       2   .text       
+     print_c                                   C26E       7       7       3   .text       
+     pmsglcd                                   C275      24      36       1   .text       
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 - VARIABLES:
      STRING.time....1                          C03B       8       8       1   .rodata1    
      STRING...2                                C043       2       2       1   .rodata1    
@@ -528,6 +600,10 @@ MODULE:                 -- main.c.o --
      rghtpb                                     906       2       2       1   .bss        
      runstp                                     908       2       2       2   .bss        
      n                                          90A       1       1       1   .bss        
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
      tenthou                                    90B       2       2       4   .bss        
      sec                                        90D       2       2       5   .bss        
      min                                        90F       2       2       4   .bss        
@@ -536,6 +612,19 @@ MODULE:                 -- main.c.o --
      _Vector_20                                FFD6       2       2       0   .abs_section_ffd6
      out                                        911       2       2       6   .common     
      out1                                       913       2       2       2   .common     
+<<<<<<< HEAD
+=======
+=======
+     bar                                        90B       2       2       3   .bss        
+     m                                          90D       2       2       4   .bss        
+     avgout                                     90F       2       2       3   .bss        
+     _Vector_7                                 FFF0       2       2       0   .abs_section_fff0
+     _Vector_15                                FFE0       2       2       0   .abs_section_ffe0
+     _Vector_20                                FFD6       2       2       0   .abs_section_ffd6
+     out                                        911       2       2      10   .common     
+     out1                                       913       2       2       1   .common     
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
      Init                                      C000      29      41       1   .init       
@@ -550,7 +639,15 @@ MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   mc9s12c32.c.o                              260      0      0
+<<<<<<< HEAD
   main.c.o                                    21    594     16
+=======
+<<<<<<< HEAD
+  main.c.o                                    21    594     16
+=======
+  main.c.o                                    21    599     13
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
   Start12.c.o                                  0     49      0
   other                                      256     12      9
 
@@ -563,7 +660,15 @@ SECTION: ".text"
 SECTION: ".data"
   prevlpb prevrpb 
 SECTION: ".bss"
+<<<<<<< HEAD
   leftpb rghtpb runstp n tenthou sec min 
+=======
+<<<<<<< HEAD
+  leftpb rghtpb runstp n tenthou sec min 
+=======
+  leftpb rghtpb runstp n bar m avgout 
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 SECTION: ".init"
   Init _Startup 
 SECTION: ".rodata1"
@@ -1098,7 +1203,14 @@ OBJECT LIST SORTED BY ADDRESS
      _ATDSTAT1                                   8B       1       1       0   .abs_section_8b
      _ATDDIEN                                    8D       1       1       1   .abs_section_8d
      _PORTAD0                                    8F       1       1       4   .abs_section_8f
+<<<<<<< HEAD
      _ATDDR0                                     90       2       2       2   .abs_section_90
+<<<<<<< HEAD
+=======
+=======
+     _ATDDR0                                     90       2       2       3   .abs_section_90
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
      _ATDDR1                                     92       2       2       2   .abs_section_92
      _ATDDR2                                     94       2       2       0   .abs_section_94
      _ATDDR3                                     96       2       2       0   .abs_section_96
@@ -1132,7 +1244,15 @@ OBJECT LIST SORTED BY ADDRESS
      _PWMPER01                                   F2       2       2       2   .abs_section_f2
      _PWMPER23                                   F4       2       2       0   .abs_section_f4
      _PWMPER45                                   F6       2       2       0   .abs_section_f6
+<<<<<<< HEAD
      _PWMDTY01                                   F8       2       2       4   .abs_section_f8
+=======
+<<<<<<< HEAD
+     _PWMDTY01                                   F8       2       2       4   .abs_section_f8
+=======
+     _PWMDTY01                                   F8       2       2       3   .abs_section_f8
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
      _PWMDTY23                                   FA       2       2       0   .abs_section_fa
      _PWMDTY45                                   FC       2       2       0   .abs_section_fc
      _PWMSDN                                     FE       1       1       0   .abs_section_fe
@@ -1250,11 +1370,16 @@ OBJECT LIST SORTED BY ADDRESS
      rghtpb                                     906       2       2       1   .bss        
      runstp                                     908       2       2       2   .bss        
      n                                          90A       1       1       1   .bss        
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
      tenthou                                    90B       2       2       4   .bss        
      sec                                        90D       2       2       5   .bss        
      min                                        90F       2       2       4   .bss        
      out                                        911       2       2       6   .common     
      out1                                       913       2       2       2   .common     
+<<<<<<< HEAD
      Init                                      C000      29      41       1   .init       
      _Startup                                  C029       8       8       0   .init       
      STRING.time....1                          C03B       8       8       1   .rodata1    
@@ -1271,6 +1396,46 @@ OBJECT LIST SORTED BY ADDRESS
      chgline                                   C261       B      11       1   .text       
      print_c                                   C26C       7       7       2   .text       
      pmsglcd                                   C273      24      36       2   .text       
+=======
+     Init                                      C000      29      41       1   .init       
+     _Startup                                  C029       8       8       0   .init       
+     STRING.time....1                          C03B       8       8       1   .rodata1    
+     STRING...2                                C043       2       2       1   .rodata1    
+     initializations                           C045      B2     178       1   .text       
+     main                                      C0F7      DA     218       3   .text       
+     RTI_ISR                                   C1D1      3B      59       1   .text       
+     TIM_ISR                                   C20C      1E      30       1   .text       
+     SCI_ISR                                   C22A       1       1       1   .text       
+     shiftout                                  C22B      14      20       1   .text       
+     lcdwait                                   C23F       A      10       2   .text       
+     send_byte                                 C249      11      17       2   .text       
+     send_i                                    C25A       7       7       5   .text       
+     chgline                                   C261       B      11       1   .text       
+     print_c                                   C26C       7       7       2   .text       
+     pmsglcd                                   C273      24      36       2   .text       
+=======
+     bar                                        90B       2       2       3   .bss        
+     m                                          90D       2       2       4   .bss        
+     avgout                                     90F       2       2       3   .bss        
+     out                                        911       2       2      10   .common     
+     out1                                       913       2       2       1   .common     
+     Init                                      C000      29      41       1   .init       
+     _Startup                                  C029       8       8       0   .init       
+     STRING.out....1                           C03B       7       7       1   .rodata1    
+     initializations                           C042      B3     179       1   .text       
+     main                                      C0F5      E5     229       3   .text       
+     RTI_ISR                                   C1DA      3B      59       1   .text       
+     TIM_ISR                                   C215      17      23       1   .text       
+     SCI_ISR                                   C22C       1       1       1   .text       
+     shiftout                                  C22D      14      20       1   .text       
+     lcdwait                                   C241       A      10       2   .text       
+     send_byte                                 C24B      11      17       2   .text       
+     send_i                                    C25C       7       7       6   .text       
+     chgline                                   C263       B      11       2   .text       
+     print_c                                   C26E       7       7       3   .text       
+     pmsglcd                                   C275      24      36       1   .text       
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
      _Vector_20                                FFD6       2       2       0   .abs_section_ffd6
      _Vector_15                                FFE0       2       2       0   .abs_section_ffe0
      _Vector_7                                 FFF0       2       2       0   .abs_section_fff0
@@ -1283,11 +1448,20 @@ main.c.o:
   inchar outchar 
 NOT USED VARIABLES
 main.c.o:
+<<<<<<< HEAD
   pwmout bar m avgout time 
+=======
+<<<<<<< HEAD
+  pwmout bar m avgout time 
+=======
+  pwmout 
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
+<<<<<<< HEAD
 ------- ROM-ADDRESS: 0xC297 ---- SIZE       4 ---
 Filling bytes inserted
  00030901
@@ -1301,6 +1475,37 @@ Filling bytes inserted
 Name of initialized Object : prevrpb:1
  01
 ------- ROM-ADDRESS: 0xC29E ---- SIZE       2 ---
+=======
+<<<<<<< HEAD
+------- ROM-ADDRESS: 0xC297 ---- SIZE       4 ---
+Filling bytes inserted
+ 00030901
+------- ROM-ADDRESS: 0xC29B ---- RAM-ADDRESS: 0x901 ---- SIZE       1 ---
+Name of initialized Object : prevlpb:1
+ 01
+------- ROM-ADDRESS: 0xC29C ---- SIZE       1 ---
+Filling bytes inserted
+ 00
+------- ROM-ADDRESS: 0xC29D ---- RAM-ADDRESS: 0x903 ---- SIZE       1 ---
+Name of initialized Object : prevrpb:1
+ 01
+------- ROM-ADDRESS: 0xC29E ---- SIZE       2 ---
+=======
+------- ROM-ADDRESS: 0xC299 ---- SIZE       4 ---
+Filling bytes inserted
+ 00030901
+------- ROM-ADDRESS: 0xC29D ---- RAM-ADDRESS: 0x901 ---- SIZE       1 ---
+Name of initialized Object : prevlpb:1
+ 01
+------- ROM-ADDRESS: 0xC29E ---- SIZE       1 ---
+Filling bytes inserted
+ 00
+------- ROM-ADDRESS: 0xC29F ---- RAM-ADDRESS: 0x903 ---- SIZE       1 ---
+Name of initialized Object : prevrpb:1
+ 01
+------- ROM-ADDRESS: 0xC2A0 ---- SIZE       2 ---
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 Filling bytes inserted
  0000
 
@@ -1316,12 +1521,30 @@ initializations           USES _CLKSEL _PLLCTL _SYNR _REFDV _CRGFLG _COPCTL
                                 _MODRR _PWME _PWMPOL _PWMCTL _PWMCAE _PWMPER01 
                                 _PWMDTY01 _PWMCLK _PWMPRCLK _PWMSCLA _TSCR1 _TSCR2 _TIOS 
                                 _TIE _TC7 
+<<<<<<< HEAD
 main                      USES initializations main leftpb runstp _PWMDTY01 
                                 chgline STRING.time....1 pmsglcd _ATDDR0 out _ATDDR1 
                                 out1 _PTT tenthou sec min STRING...2 n print_c 
 RTI_ISR                   USES _CRGFLG _PORTAD0 prevlpb leftpb prevrpb rghtpb 
 TIM_ISR                   USES _TFLG1 tenthou _ATDCTL45 _ATDSTAT0 _ATDDR0 
                                 _ATDDR1 _PWMDTY01 
+=======
+<<<<<<< HEAD
+main                      USES initializations main leftpb runstp _PWMDTY01 
+                                chgline STRING.time....1 pmsglcd _ATDDR0 out _ATDDR1 
+                                out1 _PTT tenthou sec min STRING...2 n print_c 
+RTI_ISR                   USES _CRGFLG _PORTAD0 prevlpb leftpb prevrpb rghtpb 
+TIM_ISR                   USES _TFLG1 tenthou _ATDCTL45 _ATDSTAT0 _ATDDR0 
+                                _ATDDR1 _PWMDTY01 
+=======
+main                      USES initializations leftpb runstp main _ATDDR0 out 
+                                _ATDDR1 out1 _PTT avgout m chgline send_i 
+                                STRING.out....1 pmsglcd print_c bar n 
+RTI_ISR                   USES _CRGFLG _PORTAD0 prevlpb leftpb prevrpb rghtpb 
+TIM_ISR                   USES _TFLG1 _ATDCTL45 _ATDSTAT0 _ATDDR0 _ATDDR1 
+                                _PWMDTY01 
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 shiftout                  USES _SPISR _SPIDR 
 send_byte                 USES shiftout _PTT lcdwait 
 send_i                    USES _PTT send_byte 
@@ -1355,6 +1578,14 @@ DEPENDENCY TREE
  |  |  | 
  |  |  +- send_i               (see above)
  |  |     
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+ |  +- send_i               (see above)
+ |  |  
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
  |  +- pmsglcd             
  |  |  | 
  |  |  +- print_c             
@@ -1388,5 +1619,13 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 9
+<<<<<<< HEAD
 Total size of all blocks to be downloaded: 680
+=======
+<<<<<<< HEAD
+Total size of all blocks to be downloaded: 680
+=======
+Total size of all blocks to be downloaded: 682
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 

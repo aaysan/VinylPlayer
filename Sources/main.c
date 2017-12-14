@@ -2,6 +2,11 @@
 ************************************************************************
  ECE 362 - Mini-Project C Source File - Spring 2017
 ***********************************************************************
+<<<<<<< HEAD
+=======
+
+ Team ID: < ? >
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 
  Team ID: 18
 
@@ -9,9 +14,15 @@
 
  Team Members:
 
+<<<<<<< HEAD
    - Team/Doc Leader: Kyla Hayes       Signature: Kyla Hayes
 
    - Software Leader: Mehmet Alp Aysan      Signature: Mehmet Alp Aysan
+=======
+   - Team/Doc Leader: < ? >      Signature: ______________________
+
+   - Software Leader: < ? >      Signature: ______________________
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 
    - Interface Leader: Kyla Hayes     Signature: Kyla Hayes
 
@@ -89,10 +100,19 @@ int m = 0;
 int avgout = 0;
 unsigned int out;
 unsigned int out1;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 int time = 0;
 int tenthou = 0;
 int sec = 00;
 int min = 00;
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 
 /* Special ASCII characters */
 #define CR 0x0D		// ASCII return�
@@ -110,8 +130,13 @@ int min = 00;
 #define CURMOV 0xFE	// LCD cursor move instruction
 #define LINE1 0x80	// LCD line 1 cursor position
 #define LINE2 0xC0	// LCD line 2 cursor position
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 /*
 ***********************************************************************
  Initializations
@@ -140,10 +165,21 @@ void  initializations(void) {
   PORTB  =  0x10; //assert DTR pin on COM port
 
 /* Initialize peripherals */
+<<<<<<< HEAD
   DDRAD = 0; 		//program port AD for input mode
   ATDDIEN = 0xC0; //program PAD7 and PAD6 pins as digital inputs
 
   DDRT = 0b00011011; //outputs = PTT 0,1,3,4
+=======
+    DDRAD = 0; 		//program port AD for input mode
+    ATDDIEN = 0xC0; //program PAD7 and PAD6 pins as digital inputs
+
+    DDRT = 0b00011011; //outputs = PTT 0,1,3,4
+
+    ATDCTL2 = 0x80;
+    ATDCTL3 = 0x00;
+    ATDCTL4 = 0b10000101;  //8bit res, 16 ATD clock periods, prescaler = 12
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 
   ATDCTL2 = 0x80;
   ATDCTL3 = 0x00;
@@ -176,15 +212,22 @@ void  initializations(void) {
   send_i(TWOLINE); //enable 2-line mode
   send_i(LCDCLR); //clear LCD
   lcdwait();  //wait
+<<<<<<< HEAD
+=======
+ // pmsglcd("test");
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 
 /* Initialize interrupts */
 
 	 RTICTL = 0x31;
    CRGINT = 0x80;
 
+<<<<<<< HEAD
 
 /* PWM INITS
    PWM0 is for the digital signal and PWM1 is for the motor */
+=======
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
    DDRP = 0xFF;
    MODRR = 0x03;
    PWME = 0x03;
@@ -196,12 +239,27 @@ void  initializations(void) {
    PWMPER1 = 0xFF;
    PWMDTY1 = 0x90;
    PWMCLK = 0x02;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
    PWMPRCLK = 0x01;
    PWMSCLA = 90;
 
   /*Initialize TIM here */
   TSCR1 = 0x80;
   TSCR2 = 0x0C;
+<<<<<<< HEAD
+=======
+=======
+   PWMPRCLK = 0x06;
+   PWMSCLA = 4;
+
+  /*Initialize TIM here */
+  TSCR1 = 0x80;
+    TSCR2 = 0x0C;
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
   TIOS = 0x80;
   TIE = 0x80;
   TC7 = 150;
@@ -223,6 +281,7 @@ void main(void) {
  for(;;) {
 
 /* < start of your main loop > */
+<<<<<<< HEAD
  /* < start of your main loop > */
   int delayct = 0;
   int i = 0;
@@ -377,6 +436,230 @@ void main(void) {
  //}
 
 
+=======
+<<<<<<< HEAD
+ /* < start of your main loop > */
+  int delayct = 0;
+  int i = 0;
+  
+   if (leftpb == 1){
+=======
+  int delayct = 0;
+  int i = 0;
+
+   if ( leftpb == 1){
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+      leftpb = 0;
+      //toggle runstp
+      if ( runstp == 1 ){
+        runstp = 0;
+      } else{
+        runstp = 1;
+      }
+   }
+<<<<<<< HEAD
+  
+ 
+
+   //if (runstp == 1){
+       //ATD conversion sequence
+       PWMDTY1 = 0x90;
+      
+      
+       chgline(LINE1);
+       pmsglcd("time = ");
+       
+       
+       out = ATDDR0H; //output digital signal on PTT0
+       out1 = ATDDR1H;
+       out = (out * out1); // /12;
+       for (i=0; i < 10; i++){
+
+           //check output value's 1st bit and output that bit to PTT0
+=======
+
+   if (runstp == 1){
+       //ATD conversion sequence
+       
+
+       out = ATDDR0; //output digital signal on PTT0
+       out1 = ATDDR1;
+       out = out * out1;
+       for (i=0; i < 10; i++){
+
+           //check output value's 1st bit and output that bit to PTT3
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+           if ((out & 0x80) == 0x80){
+              PTT_PTT0 = 1;
+           }
+           else {
+              PTT_PTT0 = 0;
+           }
+
+
+           //shift output bits
+           out = out << 1;
+        }
+<<<<<<< HEAD
+        
+        if (tenthou >= 10000){       //if TC7 = 150 then it takes 10000 TIM interrupts to get one second?
+          tenthou = 0;
+          sec = (sec + 1)%60; 
+          
+          n = (min / 10) % 10;
+          print_c(n + '0');
+          n = min % 10;
+          print_c(n + '0');
+          
+          pmsglcd(":");
+          
+          n = (sec / 10) % 10;
+          print_c(n + '0');
+          n = sec % 10;
+          print_c(n + '0');
+          
+          if (sec == 59){
+            min = (min + 1)%60;
+          }
+          
+        }
+        
+        
+       
+        
+        
+        /*
+        //out = ATDDR0H; //output digital signal on PTT0
+=======
+
+        out = ATDDR0H; //output digital signal on PTT0
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+        avgout = out + avgout;
+        m++;
+        
+        if ( m == 10) {
+            m = 0;
+            out = avgout/10;
+            avgout = 0;
+<<<<<<< HEAD
+            //out = PWMDTY0 - (PWMDTY0 - 130) * 2;
+        
+        chgline(LINE1);
+        //send_i(LCDCLR);
+=======
+            //out = out - (out - 225) * 2;
+        
+        chgline(LINE1);
+        send_i(LCDCLR);
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+        pmsglcd("out = ");
+        n = (out / 100) % 10;
+        print_c(n + '0');
+        n = (out / 10) % 10;
+        print_c(n + '0');
+        n = out % 10;
+        print_c(n + '0');
+        
+<<<<<<< HEAD
+        
+        
+        chgline(LINE1);
+         if(PWMDTY0 > 155){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 160){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 165){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 170){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 175){
+          print_c(0xFF);
+        }
+        
+        
+        
+        
+        if(PWMDTY0 > 180){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 185){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 190){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 195){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 200){
+          print_c(0xFF);
+        }
+        chgline(LINE2);
+        
+        if(PWMDTY0 > 155){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 160){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 165){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 170){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 175){
+          print_c(0xFF);
+        }
+        
+        if(PWMDTY0 > 180){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 185){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 190){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 195){
+          print_c(0xFF);
+        }
+        if(PWMDTY0 > 200){
+          print_c(0xFF);
+        }
+       
+        */
+          
+       
+        
+        /*chgline(LINE2);
+=======
+        chgline(LINE2);
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+        bar = out/17;
+        while(bar > 0) {
+          print_c(0xFF);
+          bar--;
+<<<<<<< HEAD
+        }*/
+     //  }
+
+   //}
+
+
+=======
+        }
+       }
+
+   }
+
+
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
    } /* loop forever */
 
 }   /* do not leave main */
@@ -418,19 +701,34 @@ interrupt 15 void TIM_ISR(void)
 {
   	// clear TIM CH 7 interrupt flag
  	TFLG1 = TFLG1 | 0x80;
+<<<<<<< HEAD
 
 
   //TIM is used to count the time as well as to to ATD conversion.
  	tenthou = (tenthou + 1);
+=======
+<<<<<<< HEAD
+ 	tenthou = (tenthou + 1);
+=======
+>>>>>>> 5b5514e83101ec7e9663f66dd5a45b35b5e4b3ca
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
  	ATDCTL5 = 0x10; //output 10-bit data
        while(ATDSTAT0 != 0x80) { //check conversion complete
        }
    asm {
+<<<<<<< HEAD
     	ldaa	ATDDR0
 	    ldab	ATDDR1
 	    mul
 	    adca	#0
 	    staa	PWMDTY0
+=======
+    	ldaa	ATDDR0		
+	    ldab	ATDDR1	
+	    mul		
+	    adca	#0		
+	    staa	PWMDTY0	
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
   }
 
 
@@ -444,7 +742,13 @@ interrupt 15 void TIM_ISR(void)
 
 interrupt 20 void SCI_ISR(void)
 {
+<<<<<<< HEAD
   //NOT USED
+=======
+
+
+
+>>>>>>> 0ccd1f2630aa5bc6bb9d2a5b38be47e389839aea
 }
 
 

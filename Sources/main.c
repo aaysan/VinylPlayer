@@ -26,8 +26,9 @@
 
 ***********************************************************************
 
- The objective of this Mini-Project is to .... < ? >
-
+ The objective of this Mini-Project is to spin a turn table and to
+ convert an analog signal from a record to digital. This signal is approximated
+ using PWM and amplified through a speaker.
 
 ***********************************************************************
 
@@ -50,12 +51,17 @@
 
   Update history (add an entry every time a significant change is made):
 
-  Date: < ? >  Name: < ? >   Update: < ? >
+  Date: 11/29/2017  Name: Kyla Hayes          Update: Added pushbutton sampling to check for applications and to
+                                              make debugging easier.
 
-  Date: < ? >  Name: < ? >   Update: < ? >
+  Date: 11/29/2017  Name: Mehmet Alp Aysan    Update: Added ATD conversion with proper test run.
+                                              Added PWM approximation of the digital signal.
 
-  Date: < ? >  Name: < ? >   Update: < ? >
+  Date: 12/02/2017  Name: Sophia Yuqin Duan   Update: Added PWM code so that the turn-table spins.
+                                              Added test code that checks for the intensity of the music.
 
+  Date: 12/03/2017  Name: Kyla Hayes          Update: Added code to display time on the LCD display. Also added code that tests
+                                              ATD and PWM.
 
 ***********************************************************************
 */
@@ -219,10 +225,10 @@ void main(void) {
  for(;;) {
 
  /* < start of your main loop > */
-  int delayct = 0;
-  int i = 0;
+  // int delayct = 0;
+  // int i = 0;
 
-   PWMDTY1 = 0x90;
+   // PWMDTY1 = 0x90;
    chgline(LINE1);
    pmsglcd("time = ");
 
